@@ -26,6 +26,7 @@ public class GameScreen implements Screen {
     private ImageView icon_shop;
     private TextView textPowerClick;
     private TextView textUpgradePassive;
+    private ImageView hat;
     private boolean isUpgradePassive = false;
 
     private float passiveIncomeTimer = 0;

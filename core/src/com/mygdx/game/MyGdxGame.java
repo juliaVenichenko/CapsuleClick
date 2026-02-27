@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.screens.CustomizationScreen;
 import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.HatsScreen;
 import com.mygdx.game.screens.ShopScreen;
 import com.mygdx.game.screens.UpgradeScreen;
 
@@ -27,6 +28,7 @@ public class MyGdxGame extends Game {
 	public ShopScreen shopScreen;
 	public CustomizationScreen customizationScreen;
 	public UpgradeScreen upgradeScreen;
+	public HatsScreen hatsScreen;
 
 	@Override
 	public void create () {
@@ -44,6 +46,7 @@ public class MyGdxGame extends Game {
 		shopScreen = new ShopScreen(this);
 		customizationScreen = new CustomizationScreen(this);
 		upgradeScreen = new UpgradeScreen(this);
+		hatsScreen = new HatsScreen(this);
 
 		setScreen(gameScreen);
 	}
@@ -57,5 +60,6 @@ public class MyGdxGame extends Game {
 		shopScreen.dispose();
 		customizationScreen.dispose();
 		upgradeScreen.dispose();
+		hatsScreen.dispose();
 	}
 }
