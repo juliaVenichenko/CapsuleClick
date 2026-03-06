@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.screens.BackgroundsScreen;
+import com.mygdx.game.screens.ColorsScreen;
 import com.mygdx.game.screens.CustomizationScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.HatsScreen;
@@ -29,7 +31,8 @@ public class MyGdxGame extends Game {
 	public CustomizationScreen customizationScreen;
 	public UpgradeScreen upgradeScreen;
 	public HatsScreen hatsScreen;
-
+	public ColorsScreen colorsScreen;
+	public BackgroundsScreen backgroundsScreen;
 	@Override
 	public void create () {
 		Box2D.init();
@@ -39,7 +42,7 @@ public class MyGdxGame extends Game {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT);
 
-		defaultFont = FontBuilder.generate(20, Color.WHITE, GameResources.FONT_MULTI);
+		defaultFont = FontBuilder.generate(30, Color.WHITE, GameResources.FONT_MULTI);
 		scoreFont = FontBuilder.generate(60, Color.YELLOW, GameResources.FONT);
 
 		gameScreen = new GameScreen(this);
@@ -47,6 +50,8 @@ public class MyGdxGame extends Game {
 		customizationScreen = new CustomizationScreen(this);
 		upgradeScreen = new UpgradeScreen(this);
 		hatsScreen = new HatsScreen(this);
+		colorsScreen = new ColorsScreen(this);
+		backgroundsScreen = new BackgroundsScreen(this);
 
 		setScreen(gameScreen);
 	}
@@ -61,5 +66,7 @@ public class MyGdxGame extends Game {
 		customizationScreen.dispose();
 		upgradeScreen.dispose();
 		hatsScreen.dispose();
+		colorsScreen.dispose();
+		backgroundsScreen.dispose();
 	}
 }

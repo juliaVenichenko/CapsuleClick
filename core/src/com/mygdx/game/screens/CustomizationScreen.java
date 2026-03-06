@@ -64,6 +64,14 @@ public class CustomizationScreen implements Screen {
                 myGdxGame.setScreen(myGdxGame.hatsScreen);
             }
 
+            if (icon_color.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                myGdxGame.setScreen(myGdxGame.colorsScreen);
+            }
+
+            if (icon_bg.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                myGdxGame.setScreen(myGdxGame.backgroundsScreen);
+            }
+
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 myGdxGame.setScreen(myGdxGame.shopScreen);
             }

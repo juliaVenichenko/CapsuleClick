@@ -35,6 +35,10 @@ public class GameResources {
     public static final String ICON_HAT = "icons/icon_hat.png";
     public static final String ICON_COLOR = "icons/icon_color.png";
     public static final String ICON_BG = "icons/icon_bg.png";
+    public static final String ICON_CUSTOMIZATION = "icons/icon_customization.png";
+    public static final String ICON_UPGRADE = "icons/icon_upgrade.png";
+    public static final String ICON_POWER = "icons/icon_power.png";
+    public static final String ICON_PASSIVE = "icons/icon_passive.png";
 
     // Шапки
     public static final String ICON_NULL_HAT = "icons/shop/hats/icon_null_hat.png";
@@ -61,4 +65,9 @@ public class GameResources {
     // Шрифты
     public static final String FONT = "fonts/font.ttf";
     public static final String FONT_MULTI = "fonts/font_multi.otf";
+
+    // Файлы
+    public static final String HATS_DATA = "files/hats_data.txt";
+    public static final String BACKGROUNDS_DATA = "files/backgrounds_data.txt";
+    public static final String COLORS_DATA = "files/colors_data.txt";
 }

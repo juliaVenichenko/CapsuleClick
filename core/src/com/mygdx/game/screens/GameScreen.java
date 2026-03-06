@@ -16,6 +16,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.components.ButtonView;
 import com.mygdx.game.components.ImageView;
 import com.mygdx.game.components.TextView;
+import com.mygdx.game.managers.FileManager;
 import com.mygdx.game.util.AnimationUtil;
 
 public class GameScreen implements Screen {
@@ -27,6 +28,10 @@ public class GameScreen implements Screen {
     private TextView textPowerClick;
     private TextView textUpgradePassive;
     private ImageView hat;
+    String curHat = GameResources.HAT_NULL;
+    String curColor = GameResources.CAPSULE_TMP;
+    String curBackground = GameResources.BACKGROUND_DEFAULT;
+    FileManager fileManager;
     private boolean isUpgradePassive = false;
 
     private float passiveIncomeTimer = 0;
@@ -37,26 +42,30 @@ public class GameScreen implements Screen {
     private float curTime;
     private TextureAtlas atlas;
 
-
     public GameScreen(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         curTime = 0;
 
-        background = new Texture(GameResources.BACKGROUND_DEFAULT);
-        capsule = new ImageView(140, 100, 350, 490, GameResources.CAPSULE_TMP);
+        fileManager = new FileManager();
+
+        // Создаём тело капсулы
+        updateColor();
+        // Изначально создаем шапку
+        updateHat();
+
+        updateBackground();
 
         textScore = new TextView(myGdxGame.scoreFont, GameSettings.SCR_WIDTH / 2, GameSettings.SCR_HEIGHT - 110);
         textPowerClick = new TextView(myGdxGame.defaultFont, GameSettings.SCR_WIDTH / 25, GameSettings.SCR_HEIGHT / 25);
         textUpgradePassive = new TextView(myGdxGame.defaultFont, GameSettings.SCR_WIDTH / 1.4f, GameSettings.SCR_HEIGHT / 25);
         icon_shop = new ImageView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_SHOP);
-        
     }
+
     @Override
     public void show() {
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
-
         initAnimation();
     }
 
@@ -66,7 +75,6 @@ public class GameScreen implements Screen {
         }
         atlas = new TextureAtlas("eyes.txt");
         eyes = AnimationUtil.getAnimationFromAtlas(atlas, 6f);
-
     }
 
     @Override
@@ -93,10 +101,21 @@ public class GameScreen implements Screen {
         textPowerClick.setText("Сила клика: " + GameSettings.UPGRADE_SCORE);
         textUpgradePassive.setText("Пассивный доход:" + GameSettings.UPGRADE_PASSIVE);
 
+        // Проверяем и обновляем
+        updateHat();
+        updateColor();
+        updateBackground();
+
         myGdxGame.batch.begin();
 
-        myGdxGame.batch.draw(background,  0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT);
-        capsule.draw(myGdxGame.batch);
+        if (background != null){
+            myGdxGame.batch.draw(background,  0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT);
+        }
+
+        if (capsule != null) {
+            capsule.draw(myGdxGame.batch);
+        }
+
         icon_shop.draw(myGdxGame.batch);
 
         textScore.draw(myGdxGame.batch);
@@ -104,28 +123,126 @@ public class GameScreen implements Screen {
         textUpgradePassive.draw(myGdxGame.batch);
 
         TextureRegion region = eyes.getKeyFrame(curTime, true);
-        myGdxGame.batch.draw(region, 210, 340, 200f, 80f);
+        myGdxGame.batch.draw(region, 210, 300, 200f, 80f);
+
+        // Отрисовка шапки
+        if (hat != null) {
+            hat.draw(myGdxGame.batch);
+        }
 
         myGdxGame.batch.end();
     }
 
+    private void updateHat() {
+        int hatIndex = fileManager.readFromFile(GameResources.HATS_DATA); // Предполагается, что это возвращает индекс шапки
+        switch (hatIndex) {
+            case 1:
+                curHat = GameResources.HAT_APPLE;
+                break;
+            case 2:
+                curHat = GameResources.HAT_CAP;
+                break;
+            case 3:
+                curHat = GameResources.HAT_CAPYBARA;
+                break;
+            case 0:
+                curHat = GameResources.HAT_NULL;
+                break;
+        }
+        // Освобождаем ресурсы старого объекта hat
+        if (hat != null) {
+            hat.dispose();
+        }
+        // Обновляем объект hat
+        hat = new ImageView(150, 360, 387, 287, curHat);
+    }
+
+    private void updateColor() {
+        int hatIndex = fileManager.readFromFile(GameResources.COLORS_DATA);
+        switch (hatIndex) {
+            case 1:
+                curColor = GameResources.CAPSULE_GREEN;
+                break;
+            case 2:
+                curColor = GameResources.CAPSULE_BLUE;
+                break;
+            case 3:
+                curColor = GameResources.CAPSULE_RED;
+                break;
+            case 4:
+                curColor = GameResources.CAPSULE_PLUM;
+                break;
+            case 5:
+                curColor = GameResources.CAPSULE_YELLOW;
+                break;
+            case 6:
+                curColor = GameResources.CAPSULE_ORANGE;
+                break;
+            case 0:
+                curColor = GameResources.CAPSULE_TMP;
+                break;
+        }
+        // Освобождаем ресурсы старого объекта capsule
+        if (capsule != null) {
+            capsule.dispose();
+        }
+        // Обновляем capsule
+        capsule = new ImageView(140, 60, 350, 490, curColor);
+    }
+
+    private void updateBackground() {
+        int hatIndex = fileManager.readFromFile(GameResources.BACKGROUNDS_DATA);
+        switch (hatIndex) {
+            case 1:
+                curBackground = GameResources.BACKGROUND_PLANET;
+                break;
+            case 2:
+                curBackground = GameResources.BACKGROUND_MOUNTAINS;
+                break;
+            case 3:
+                curBackground = GameResources.BACKGROUND_RAINBOW;
+                break;
+            case 4:
+                curBackground = GameResources.BACKGROUND_EPIC;
+                break;
+            case 0:
+                curBackground = GameResources.BACKGROUND_DEFAULT;
+                break;
+        }
+        // Освобождаем ресурсы старого объекта background
+        if (background != null) {
+            background.dispose();
+        }
+        // Обновляем background
+        background = new Texture(curBackground);
+    }
+
     @Override
     public void dispose() {
-        background.dispose();
-        capsule.dispose();
+        if (background != null){
+            background.dispose();
+        }
+
+        if(capsule != null){
+            capsule.dispose();
+        }
         if (textScore != null) {
             textScore.dispose();
 //            textScore = null; // Обнуляем ссылку для предотвращения дальнейшего использования
         }
         if (textPowerClick != null) {
             textPowerClick.dispose();
-//            textPowerClick = null; // Обнуляем ссылку
+//            textPowerClick = null;
         }
         if (textUpgradePassive != null) {
             textUpgradePassive.dispose();
-//            textUpgradePassive = null; // Обнуляем ссылку
+//            textUpgradePassive = null;
         }
         icon_shop.dispose();
+
+        if(hat != null){
+            hat.dispose();
+        }
 
         if (textureAtlasArray != null){
             for (TextureAtlas atlas : textureAtlasArray) {
