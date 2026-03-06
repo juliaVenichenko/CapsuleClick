@@ -62,6 +62,12 @@ public class GameResources {
     public static final String ICON_BG_PLANET = "icons/shop/bg/icon_bg_planet.png";
     public static final String ICON_BG_RAINBOW = "icons/shop/bg/icon_bg_rainbow.png";
 
+    //
+    public static final String ICON_LEVEL1 = "Level1.png";
+    public static final String ICON_LEVEL2 = "Level2.png";
+    public static final String ICON_LEVEL3 = "Level3.png";
+    public static final String ICON_LEVEL4 = "Level4.png";
+
     // Шрифты
     public static final String FONT = "fonts/font.ttf";
     public static final String FONT_MULTI = "fonts/font_multi.otf";
@@ -70,4 +76,5 @@ public class GameResources {
     public static final String HATS_DATA = "files/hats_data.txt";
     public static final String BACKGROUNDS_DATA = "files/backgrounds_data.txt";
     public static final String COLORS_DATA = "files/colors_data.txt";
+    public static final String LEVELS_DATA = "files/levels_data.txt";
 }

@@ -16,6 +16,7 @@ import com.mygdx.game.screens.ColorsScreen;
 import com.mygdx.game.screens.CustomizationScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.HatsScreen;
+import com.mygdx.game.screens.PowerScreen;
 import com.mygdx.game.screens.ShopScreen;
 import com.mygdx.game.screens.UpgradeScreen;
 
@@ -33,6 +34,8 @@ public class MyGdxGame extends Game {
 	public HatsScreen hatsScreen;
 	public ColorsScreen colorsScreen;
 	public BackgroundsScreen backgroundsScreen;
+	public PowerScreen powerScreen;
+
 	@Override
 	public void create () {
 		Box2D.init();
@@ -52,6 +55,7 @@ public class MyGdxGame extends Game {
 		hatsScreen = new HatsScreen(this);
 		colorsScreen = new ColorsScreen(this);
 		backgroundsScreen = new BackgroundsScreen(this);
+		powerScreen = new PowerScreen(this);
 
 		setScreen(gameScreen);
 	}
@@ -68,5 +72,6 @@ public class MyGdxGame extends Game {
 		hatsScreen.dispose();
 		colorsScreen.dispose();
 		backgroundsScreen.dispose();
+		powerScreen.dispose();
 	}
 }

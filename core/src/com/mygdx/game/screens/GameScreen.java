@@ -55,7 +55,9 @@ public class GameScreen implements Screen {
 
         updateBackground();
 
-        textScore = new TextView(myGdxGame.scoreFont, GameSettings.SCR_WIDTH / 2, GameSettings.SCR_HEIGHT - 110);
+        updatePowerScore();
+
+        textScore = new TextView(myGdxGame.scoreFont, GameSettings.SCR_WIDTH / 2 - 20, GameSettings.SCR_HEIGHT - 110);
         textPowerClick = new TextView(myGdxGame.defaultFont, GameSettings.SCR_WIDTH / 25, GameSettings.SCR_HEIGHT / 25);
         textUpgradePassive = new TextView(myGdxGame.defaultFont, GameSettings.SCR_WIDTH / 1.4f, GameSettings.SCR_HEIGHT / 25);
         icon_shop = new ImageView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
@@ -74,7 +76,7 @@ public class GameScreen implements Screen {
             atlas.dispose();
         }
         atlas = new TextureAtlas("eyes.txt");
-        eyes = AnimationUtil.getAnimationFromAtlas(atlas, 6f);
+        eyes = AnimationUtil.getAnimationFromAtlas(atlas, 5f);
     }
 
     @Override
@@ -97,14 +99,14 @@ public class GameScreen implements Screen {
             }
         }
 
-        textScore.setText(formatScore(GameSettings.SCORE));
-        textPowerClick.setText("Сила клика: " + GameSettings.UPGRADE_SCORE);
-        textUpgradePassive.setText("Пассивный доход:" + GameSettings.UPGRADE_PASSIVE);
-
         // Проверяем и обновляем
         updateHat();
         updateColor();
         updateBackground();
+
+        textScore.setText(formatScore(GameSettings.SCORE));
+        textPowerClick.setText("Сила клика: " + GameSettings.UPGRADE_POWER);
+        textUpgradePassive.setText("Пассивный доход:" + GameSettings.UPGRADE_PASSIVE);
 
         myGdxGame.batch.begin();
 
@@ -123,7 +125,7 @@ public class GameScreen implements Screen {
         textUpgradePassive.draw(myGdxGame.batch);
 
         TextureRegion region = eyes.getKeyFrame(curTime, true);
-        myGdxGame.batch.draw(region, 210, 300, 200f, 80f);
+        myGdxGame.batch.draw(region, 190, 300, 200f, 80f);
 
         // Отрисовка шапки
         if (hat != null) {
@@ -133,9 +135,24 @@ public class GameScreen implements Screen {
         myGdxGame.batch.end();
     }
 
+    private void updatePowerScore(){
+        int index = fileManager.readFromFile(GameResources.LEVELS_DATA);
+        switch (index) {
+            case 2:
+                GameSettings.UPGRADE_POWER = 2;
+                break;
+            case 3:
+                GameSettings.UPGRADE_POWER = 3;
+                break;
+            case 4:
+                GameSettings.UPGRADE_POWER = 4;
+                break;
+        }
+    }
+
     private void updateHat() {
-        int hatIndex = fileManager.readFromFile(GameResources.HATS_DATA); // Предполагается, что это возвращает индекс шапки
-        switch (hatIndex) {
+        int index = fileManager.readFromFile(GameResources.HATS_DATA); // Предполагается, что это возвращает индекс шапки
+        switch (index) {
             case 1:
                 curHat = GameResources.HAT_APPLE;
                 break;
@@ -154,12 +171,12 @@ public class GameScreen implements Screen {
             hat.dispose();
         }
         // Обновляем объект hat
-        hat = new ImageView(150, 360, 387, 287, curHat);
+        hat = new ImageView(133, 360, 387, 287, curHat);
     }
 
     private void updateColor() {
-        int hatIndex = fileManager.readFromFile(GameResources.COLORS_DATA);
-        switch (hatIndex) {
+        int index = fileManager.readFromFile(GameResources.COLORS_DATA);
+        switch (index) {
             case 1:
                 curColor = GameResources.CAPSULE_GREEN;
                 break;
@@ -187,12 +204,12 @@ public class GameScreen implements Screen {
             capsule.dispose();
         }
         // Обновляем capsule
-        capsule = new ImageView(140, 60, 350, 490, curColor);
+        capsule = new ImageView(120, 60, 350, 490, curColor);
     }
 
     private void updateBackground() {
-        int hatIndex = fileManager.readFromFile(GameResources.BACKGROUNDS_DATA);
-        switch (hatIndex) {
+        int index = fileManager.readFromFile(GameResources.BACKGROUNDS_DATA);
+        switch (index) {
             case 1:
                 curBackground = GameResources.BACKGROUND_PLANET;
                 break;
@@ -256,7 +273,8 @@ public class GameScreen implements Screen {
             myGdxGame.touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             if (capsule.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                GameSettings.SCORE += GameSettings.UPGRADE_SCORE;
+                updatePowerScore();
+                GameSettings.SCORE += GameSettings.UPGRADE_POWER;
             }
 //            // Реализовать запись текущей мощности клика в файл!
 //            if (upgradeClick.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
