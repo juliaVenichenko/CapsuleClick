@@ -62,11 +62,15 @@ public class GameResources {
     public static final String ICON_BG_PLANET = "icons/shop/bg/icon_bg_planet.png";
     public static final String ICON_BG_RAINBOW = "icons/shop/bg/icon_bg_rainbow.png";
 
-    //
+    // Уровни силы клика
     public static final String ICON_LEVEL1 = "Level1.png";
     public static final String ICON_LEVEL2 = "Level2.png";
     public static final String ICON_LEVEL3 = "Level3.png";
     public static final String ICON_LEVEL4 = "Level4.png";
+
+    // Вкл/выкл для пассивного дохода
+    public static final String ICON_PASSIVE_ON = "passive_on.png";
+    public static final String ICON_PASSIVE_OFF = "passive_off.png";
 
     // Шрифты
     public static final String FONT = "fonts/font.ttf";
@@ -77,4 +81,5 @@ public class GameResources {
     public static final String BACKGROUNDS_DATA = "files/backgrounds_data.txt";
     public static final String COLORS_DATA = "files/colors_data.txt";
     public static final String LEVELS_DATA = "files/levels_data.txt";
+    public static final String PASSIVE_DATA = "files/passive_data.txt";
 }

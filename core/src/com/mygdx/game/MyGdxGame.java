@@ -16,6 +16,7 @@ import com.mygdx.game.screens.ColorsScreen;
 import com.mygdx.game.screens.CustomizationScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.HatsScreen;
+import com.mygdx.game.screens.PassiveScreen;
 import com.mygdx.game.screens.PowerScreen;
 import com.mygdx.game.screens.ShopScreen;
 import com.mygdx.game.screens.UpgradeScreen;
@@ -35,6 +36,7 @@ public class MyGdxGame extends Game {
 	public ColorsScreen colorsScreen;
 	public BackgroundsScreen backgroundsScreen;
 	public PowerScreen powerScreen;
+	public PassiveScreen passiveScreen;
 
 	@Override
 	public void create () {
@@ -56,8 +58,9 @@ public class MyGdxGame extends Game {
 		colorsScreen = new ColorsScreen(this);
 		backgroundsScreen = new BackgroundsScreen(this);
 		powerScreen = new PowerScreen(this);
+		passiveScreen = new PassiveScreen(this);
 
-		setScreen(gameScreen);
+		setScreen(passiveScreen);
 	}
 
 	@Override
@@ -73,5 +76,6 @@ public class MyGdxGame extends Game {
 		colorsScreen.dispose();
 		backgroundsScreen.dispose();
 		powerScreen.dispose();
+		passiveScreen.dispose();
 	}
 }

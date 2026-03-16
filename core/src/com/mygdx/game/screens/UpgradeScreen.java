@@ -64,6 +64,10 @@ public class UpgradeScreen implements Screen {
                 myGdxGame.setScreen(myGdxGame.powerScreen);
             }
 
+            if (icon_passive.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                myGdxGame.setScreen(myGdxGame.passiveScreen);
+            }
+
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 myGdxGame.setScreen(myGdxGame.shopScreen);
             }

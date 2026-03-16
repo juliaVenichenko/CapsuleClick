@@ -26,13 +26,12 @@ public class GameScreen implements Screen {
     private TextView textScore;
     private ImageView icon_shop;
     private TextView textPowerClick;
-    private TextView textUpgradePassive;
     private ImageView hat;
     String curHat = GameResources.HAT_NULL;
     String curColor = GameResources.CAPSULE_TMP;
     String curBackground = GameResources.BACKGROUND_DEFAULT;
     FileManager fileManager;
-    private boolean isUpgradePassive = false;
+    private boolean onPassive = false;
 
     private float passiveIncomeTimer = 0;
     private static final float PASSIVE_INCOME_INTERVAL = 1.0f;
@@ -57,9 +56,10 @@ public class GameScreen implements Screen {
 
         updatePowerScore();
 
+        activatePassive();
+
         textScore = new TextView(myGdxGame.scoreFont, GameSettings.SCR_WIDTH / 2 - 20, GameSettings.SCR_HEIGHT - 110);
         textPowerClick = new TextView(myGdxGame.defaultFont, GameSettings.SCR_WIDTH / 25, GameSettings.SCR_HEIGHT / 25);
-        textUpgradePassive = new TextView(myGdxGame.defaultFont, GameSettings.SCR_WIDTH / 1.4f, GameSettings.SCR_HEIGHT / 25);
         icon_shop = new ImageView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_SHOP);
     }
@@ -91,7 +91,9 @@ public class GameScreen implements Screen {
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
 
-        if (isUpgradePassive) {
+        activatePassive();
+
+        if (onPassive) {
             passiveIncomeTimer += delta;
             if (passiveIncomeTimer >= PASSIVE_INCOME_INTERVAL) {
                 GameSettings.SCORE += GameSettings.UPGRADE_PASSIVE;
@@ -104,9 +106,8 @@ public class GameScreen implements Screen {
         updateColor();
         updateBackground();
 
-        textScore.setText(formatScore(GameSettings.SCORE));
+        textScore.setText(GameSettings.SCORE + "");
         textPowerClick.setText("Сила клика: " + GameSettings.UPGRADE_POWER);
-        textUpgradePassive.setText("Пассивный доход:" + GameSettings.UPGRADE_PASSIVE);
 
         myGdxGame.batch.begin();
 
@@ -122,7 +123,6 @@ public class GameScreen implements Screen {
 
         textScore.draw(myGdxGame.batch);
         textPowerClick.draw(myGdxGame.batch);
-        textUpgradePassive.draw(myGdxGame.batch);
 
         TextureRegion region = eyes.getKeyFrame(curTime, true);
         myGdxGame.batch.draw(region, 190, 300, 200f, 80f);
@@ -234,6 +234,18 @@ public class GameScreen implements Screen {
         background = new Texture(curBackground);
     }
 
+    private  void activatePassive(){
+        int index = fileManager.readFromFile(GameResources.PASSIVE_DATA);
+        switch (index) {
+            case 1:
+                onPassive = true;
+                break;
+            case 0:
+                onPassive = false;
+                break;
+        }
+    }
+
     @Override
     public void dispose() {
         if (background != null){
@@ -250,10 +262,6 @@ public class GameScreen implements Screen {
         if (textPowerClick != null) {
             textPowerClick.dispose();
 //            textPowerClick = null;
-        }
-        if (textUpgradePassive != null) {
-            textUpgradePassive.dispose();
-//            textUpgradePassive = null;
         }
         icon_shop.dispose();
 
@@ -276,29 +284,10 @@ public class GameScreen implements Screen {
                 updatePowerScore();
                 GameSettings.SCORE += GameSettings.UPGRADE_POWER;
             }
-//            // Реализовать запись текущей мощности клика в файл!
-//            if (upgradeClick.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-//                GameSettings.SCORE -= GameSettings.UPGRADE_SCORE;
-//                GameSettings.UPGRADE_SCORE *= 2;
-//            }
-//            // Реализовать запись текущего пассивного дохода в файл!
-//            if (upgradePassive.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-//                isUpgradePassive = true;
-//                GameSettings.UPGRADE_PASSIVE += 1;
-//                GameSettings.SCORE -= GameSettings.UPGRADE_PASSIVE;
-//            }
+
             if (icon_shop.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 myGdxGame.setScreen(myGdxGame.shopScreen);
             }
-        }
-    }
-
-    private String formatScore(int score) {
-        if (score < 1000) {
-            return String.valueOf(score);
-        } else {
-            double formattedScore = score / 1000.0;
-            return String.format("%.1fk", formattedScore).replace(",", ".");
         }
     }
 
