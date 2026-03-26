@@ -28,7 +28,7 @@ public class PowerScreen implements Screen {
         background = new Texture(GameResources.BACKGROUND_SHOP);
         fileManager = new FileManager();
 
-        levelsText = new TextView(myGdxGame.defaultFont, 60, 100, curLevelText);
+        levelsText = new TextView(myGdxGame.blackFontMulti, 140, 150, curLevelText);
 
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
@@ -76,6 +76,7 @@ public class PowerScreen implements Screen {
                 fileManager.writeToFile(2, GameResources.LEVELS_DATA);
                 GameSettings.UPGRADE_POWER = 2;
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
 
             if (levels.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 20 && curLevel.equals(GameResources.ICON_LEVEL2)) {
@@ -83,6 +84,7 @@ public class PowerScreen implements Screen {
                 fileManager.writeToFile(3, GameResources.LEVELS_DATA);
                 GameSettings.UPGRADE_POWER = 3;
                 GameSettings.SCORE -= 20;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
 
             if (levels.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 30 && curLevel.equals(GameResources.ICON_LEVEL3)) {
@@ -90,6 +92,7 @@ public class PowerScreen implements Screen {
                 fileManager.writeToFile(4, GameResources.LEVELS_DATA);
                 GameSettings.UPGRADE_POWER = 4;
                 GameSettings.SCORE -= 30;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
@@ -129,6 +132,7 @@ public class PowerScreen implements Screen {
 
     @Override
     public void dispose() {
+        myGdxGame.audioManager.buySound.dispose();
         background.dispose();
         if (levels != null){
             levels.dispose();

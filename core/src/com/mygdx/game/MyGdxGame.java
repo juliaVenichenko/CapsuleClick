@@ -1,7 +1,5 @@
 package com.mygdx.game;
 
-import static com.mygdx.game.GameSettings.SCR_HEIGHT;
-import static com.mygdx.game.GameSettings.SCR_WIDTH;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.managers.AudioManager;
 import com.mygdx.game.screens.BackgroundsScreen;
 import com.mygdx.game.screens.ColorsScreen;
 import com.mygdx.game.screens.CustomizationScreen;
@@ -27,6 +26,8 @@ public class MyGdxGame extends Game {
 	public OrthographicCamera camera;
 	public BitmapFont defaultFont;
 	public BitmapFont scoreFont;
+	public BitmapFont blackFontBasic;
+	public BitmapFont blackFontMulti;
 	public Vector3 touch;
 	public GameScreen gameScreen;
 	public ShopScreen shopScreen;
@@ -38,6 +39,8 @@ public class MyGdxGame extends Game {
 	public PowerScreen powerScreen;
 	public PassiveScreen passiveScreen;
 
+	public AudioManager audioManager;
+
 	@Override
 	public void create () {
 		Box2D.init();
@@ -48,7 +51,9 @@ public class MyGdxGame extends Game {
 		camera.setToOrtho(false, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT);
 
 		defaultFont = FontBuilder.generate(30, Color.WHITE, GameResources.FONT_MULTI);
-		scoreFont = FontBuilder.generate(60, Color.YELLOW, GameResources.FONT);
+		scoreFont = FontBuilder.generate(60, Color.PINK, GameResources.FONT);
+		blackFontBasic = FontBuilder.generate(25, Color.BLACK, GameResources.FONT);
+		blackFontMulti = FontBuilder.generate(35, Color.BLACK, GameResources.FONT_MULTI);
 
 		gameScreen = new GameScreen(this);
 		shopScreen = new ShopScreen(this);
@@ -60,7 +65,11 @@ public class MyGdxGame extends Game {
 		powerScreen = new PowerScreen(this);
 		passiveScreen = new PassiveScreen(this);
 
-		setScreen(passiveScreen);
+		audioManager = new AudioManager();
+
+		audioManager.gameMusic.play();
+
+		setScreen(gameScreen);
 	}
 
 	@Override
@@ -78,4 +87,5 @@ public class MyGdxGame extends Game {
 		powerScreen.dispose();
 		passiveScreen.dispose();
 	}
+
 }

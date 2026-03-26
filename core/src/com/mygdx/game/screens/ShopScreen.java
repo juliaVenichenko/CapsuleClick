@@ -23,8 +23,8 @@ public class ShopScreen implements Screen {
         background = new Texture(GameResources.BACKGROUND_SHOP);
         icon_game = new ImageView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_GAME);
-        icon_upgrade = new ImageView(90, 400, 160, 160, GameResources.ICON_UPGRADE);
-        icon_customization = new ImageView(350, 400, 160, 160, GameResources.ICON_CUSTOMIZATION);
+        icon_upgrade = new ImageView(70, 400, 160, 140, GameResources.ICON_UPGRADE);
+        icon_customization = new ImageView(350, 400, 160, 140, GameResources.ICON_CUSTOMIZATION);
     }
     @Override
     public void show() {

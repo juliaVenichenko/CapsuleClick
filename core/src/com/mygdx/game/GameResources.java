@@ -30,7 +30,8 @@ public class GameResources {
     // ИКОНКИ
     public static final String ICON_SHOP = "icons/icon_shop.png";
     public static final String ICON_GAME = "icons/icon_game.png";
-    public static final String ICON_SETTINGS = "icons/icon_settings.png";
+    public static final String ICON_VOLUME = "icons/icon_volume.png";
+    public static final String ICON_SOUND = "icons/icon_sound.png";
     public static final String ICON_BACK = "icons/icon_back.png";
     public static final String ICON_HAT = "icons/icon_hat.png";
     public static final String ICON_COLOR = "icons/icon_color.png";
@@ -69,8 +70,13 @@ public class GameResources {
     public static final String ICON_LEVEL4 = "Level4.png";
 
     // Вкл/выкл для пассивного дохода
-    public static final String ICON_PASSIVE_ON = "passive_on.png";
-    public static final String ICON_PASSIVE_OFF = "passive_off.png";
+    public static final String ICON_ON = "on.png";
+    public static final String ICON_OFF = "off.png";
+
+    // Audio
+    public static final String GAME_MUSIC = "audio/gameMusic.mp3";
+    public static final String BUY_SOUND = "audio/buySound.mp3";
+    public static final String LAUGHTER_SOUND = "audio/laughter.mp3";
 
     // Шрифты
     public static final String FONT = "fonts/font.ttf";

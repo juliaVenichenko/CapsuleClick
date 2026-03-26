@@ -38,21 +38,21 @@ public class ColorsScreen implements Screen {
     public ColorsScreen(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new Texture(GameResources.BACKGROUND_SHOP);
-        colorWhite = new ImageView(50, 570, 120, 140, GameResources.ICON_COLOR_WHITE);
-        colorGreen = new ImageView(240, 570, 120, 140, GameResources.ICON_COLOR_GREEN);
-        colorBlue = new ImageView(430, 570, 120, 140, GameResources.ICON_COLOR_BLUE);
-        colorRed = new ImageView(50, 330, 120, 140, GameResources.ICON_COLOR_RED);
-        colorPlum = new ImageView(240, 330, 120, 140, GameResources.ICON_COLOR_LILAC);
-        colorYellow = new ImageView(430, 330, 120, 140, GameResources.ICON_COLOR_YELLOW);
-        colorOrange = new ImageView(50, 90, 120, 140, GameResources.ICON_COLOR_ORANGE);
+        colorWhite = new ImageView(30, 570, 160, 120, GameResources.ICON_COLOR_WHITE);
+        colorGreen = new ImageView(220, 570, 160, 120, GameResources.ICON_COLOR_GREEN);
+        colorBlue = new ImageView(410, 570, 160, 120, GameResources.ICON_COLOR_BLUE);
+        colorRed = new ImageView(30, 330, 160, 120, GameResources.ICON_COLOR_RED);
+        colorPlum = new ImageView(220, 330, 160, 120, GameResources.ICON_COLOR_LILAC);
+        colorYellow = new ImageView(410, 330, 160, 120, GameResources.ICON_COLOR_YELLOW);
+        colorOrange = new ImageView(30, 90, 160, 120, GameResources.ICON_COLOR_ORANGE);
 
-        buyColorWhite = new ButtonView(40, 510, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 монет");
-        buyColorGreen = new ButtonView(230, 510, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyColorBlue = new ButtonView(420, 510, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyColorRed = new ButtonView(40, 270, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyColorPlum = new ButtonView(230, 270, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyColorYellow = new ButtonView(420, 270, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyColorOrange = new ButtonView(40, 30, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyColorWhite = new ButtonView(30, 510, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 монет");
+        buyColorGreen = new ButtonView(220, 510, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyColorBlue = new ButtonView(410, 510, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyColorRed = new ButtonView(30, 270, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyColorPlum = new ButtonView(220, 270, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyColorYellow = new ButtonView(410, 270, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyColorOrange = new ButtonView(30, 30, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
 
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
@@ -106,36 +106,43 @@ public class ColorsScreen implements Screen {
             if (buyColorWhite.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 System.out.println("Writing to file: 0");
                 fileManager.writeToFile(0, GameResources.COLORS_DATA);
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyColorGreen.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 1");
                 fileManager.writeToFile(1, GameResources.COLORS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyColorBlue.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 2");
                 fileManager.writeToFile(2, GameResources.COLORS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyColorRed.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 3");
                 fileManager.writeToFile(3, GameResources.COLORS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyColorPlum.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 4");
                 fileManager.writeToFile(4, GameResources.COLORS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyColorYellow.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 5");
                 fileManager.writeToFile(5, GameResources.COLORS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyColorOrange.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 6");
                 fileManager.writeToFile(6, GameResources.COLORS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
@@ -146,6 +153,7 @@ public class ColorsScreen implements Screen {
 
     @Override
     public void dispose() {
+        myGdxGame.audioManager.buySound.dispose();
         background.dispose();
         colorWhite.dispose();
         colorGreen.dispose();

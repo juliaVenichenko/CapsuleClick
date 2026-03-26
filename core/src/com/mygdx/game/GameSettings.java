@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.mygdx.game.managers.FileManager;
 
 public class GameSettings {
     // Параметры экрана
@@ -10,4 +9,5 @@ public class GameSettings {
     public static int SCORE = 0;
     public static int UPGRADE_POWER = 1;
     public static int UPGRADE_PASSIVE = 1;
+
 }

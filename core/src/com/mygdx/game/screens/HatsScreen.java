@@ -38,15 +38,15 @@ public class HatsScreen implements Screen {
     public HatsScreen(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new Texture(GameResources.BACKGROUND_SHOP);
-        hatNull = new ImageView(50, 500, 140, 160, GameResources.ICON_NULL_HAT);
-        hatApple = new ImageView(240, 500, 140, 160, GameResources.ICON_APPLE_HAT);
-        hatCap = new ImageView(430, 500, 140, 160, GameResources.ICON_NG_HAT);
-        hatCapybara = new ImageView(50, 190, 140, 160, GameResources.ICON_CAPYBARA_HAT);
+        hatNull = new ImageView(30, 500, 160, 140, GameResources.ICON_NULL_HAT);
+        hatApple = new ImageView(220, 500, 160, 140, GameResources.ICON_APPLE_HAT);
+        hatCap = new ImageView(410, 500, 160, 140, GameResources.ICON_NG_HAT);
+        hatCapybara = new ImageView(30, 230, 160, 140, GameResources.ICON_CAPYBARA_HAT);
 
-        buyHatApple = new ButtonView(240, 440, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyHatCap = new ButtonView(430, 440, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "20 монет");
-        buyHatCapybara = new ButtonView(50, 130, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "30 монет");
-        buyHatNull = new ButtonView(50, 440, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 монет");
+        buyHatApple = new ButtonView(220, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyHatCap = new ButtonView(410, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "20 монет");
+        buyHatCapybara = new ButtonView(30, 170, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "30 монет");
+        buyHatNull = new ButtonView(30, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 монет");
 
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
@@ -94,20 +94,24 @@ public class HatsScreen implements Screen {
                 System.out.println("Writing to file: 1");
                 fileManager.writeToFile(1, GameResources.HATS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyHatCap.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 20) {
                 System.out.println("Writing to file: 2");
                 fileManager.writeToFile(2, GameResources.HATS_DATA);
                 GameSettings.SCORE -= 20;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyHatCapybara.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 30) {
                 System.out.println("Writing to file: 3");
                 fileManager.writeToFile(3, GameResources.HATS_DATA);
                 GameSettings.SCORE -= 30;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyHatNull.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 System.out.println("Writing to file: 0");
                 fileManager.writeToFile(0, GameResources.HATS_DATA);
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
@@ -118,6 +122,7 @@ public class HatsScreen implements Screen {
 
     @Override
     public void dispose() {
+        myGdxGame.audioManager.buySound.dispose();
         background.dispose();
         hatNull.dispose();
         hatApple.dispose();

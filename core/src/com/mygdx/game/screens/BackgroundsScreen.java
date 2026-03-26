@@ -33,17 +33,17 @@ public class BackgroundsScreen implements Screen {
     public BackgroundsScreen(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new Texture(GameResources.BACKGROUND_SHOP);
-        bgDefault = new ImageView(50, 500, 140, 160, GameResources.ICON_BG_DEFAULT);
-        bgPlanet = new ImageView(240, 500, 140, 160, GameResources.ICON_BG_PLANET);
-        bgMountains = new ImageView(430, 500, 140, 160, GameResources.ICON_BG_MOUNTAINS);
-        bgRainbow = new ImageView(50, 190, 140, 160, GameResources.ICON_BG_RAINBOW);
-        bgEpic = new ImageView(240, 190, 140, 160, GameResources.ICON_BG_EPIC);
+        bgDefault = new ImageView(30, 500, 160, 140, GameResources.ICON_BG_DEFAULT);
+        bgPlanet = new ImageView(220, 500, 160, 140, GameResources.ICON_BG_PLANET);
+        bgMountains = new ImageView(410, 500, 160, 140, GameResources.ICON_BG_MOUNTAINS);
+        bgRainbow = new ImageView(30, 190, 160, 140, GameResources.ICON_BG_RAINBOW);
+        bgEpic = new ImageView(220, 190, 160, 140, GameResources.ICON_BG_EPIC);
 
-        buyBgDefault = new ButtonView(50, 440, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 монет");
-        buyBgPlanet = new ButtonView(240, 440, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyBgMountains = new ButtonView(430, 440, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyBgRainbow = new ButtonView(50, 130, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyBgEpic = new ButtonView(240, 130, 140, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyBgDefault = new ButtonView(30, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 монет");
+        buyBgPlanet = new ButtonView(220, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyBgMountains = new ButtonView(410, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyBgRainbow = new ButtonView(30, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyBgEpic = new ButtonView(220, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
 
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
@@ -93,26 +93,31 @@ public class BackgroundsScreen implements Screen {
             if (buyBgDefault.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 System.out.println("Writing to file: 0");
                 fileManager.writeToFile(0, GameResources.BACKGROUNDS_DATA);
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyBgPlanet.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 1");
                 fileManager.writeToFile(1, GameResources.BACKGROUNDS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyBgMountains.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 2");
                 fileManager.writeToFile(2, GameResources.BACKGROUNDS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyBgRainbow.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 3");
                 fileManager.writeToFile(3, GameResources.BACKGROUNDS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyBgEpic.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
                 System.out.println("Writing to file: 4");
                 fileManager.writeToFile(4, GameResources.BACKGROUNDS_DATA);
                 GameSettings.SCORE -= 10;
+                myGdxGame.audioManager.buySound.play(0.2f);
             }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
@@ -123,6 +128,7 @@ public class BackgroundsScreen implements Screen {
 
     @Override
     public void dispose() {
+        myGdxGame.audioManager.buySound.dispose();
         background.dispose();
         bgDefault.dispose();
         bgPlanet.dispose();

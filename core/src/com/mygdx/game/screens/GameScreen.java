@@ -25,13 +25,18 @@ public class GameScreen implements Screen {
     private ImageView capsule;
     private TextView textScore;
     private ImageView icon_shop;
+    private ImageView icon_music;
+    private ImageView icon_sound;
     private TextView textPowerClick;
     private ImageView hat;
+    private ImageView waferScore;
     String curHat = GameResources.HAT_NULL;
     String curColor = GameResources.CAPSULE_TMP;
     String curBackground = GameResources.BACKGROUND_DEFAULT;
     FileManager fileManager;
     private boolean onPassive = false;
+    boolean isPauseMusic = false;
+    boolean isPauseSound = false;
 
     private float passiveIncomeTimer = 0;
     private static final float PASSIVE_INCOME_INTERVAL = 1.0f;
@@ -58,10 +63,16 @@ public class GameScreen implements Screen {
 
         activatePassive();
 
-        textScore = new TextView(myGdxGame.scoreFont, GameSettings.SCR_WIDTH / 2 - 20, GameSettings.SCR_HEIGHT - 110);
-        textPowerClick = new TextView(myGdxGame.defaultFont, GameSettings.SCR_WIDTH / 25, GameSettings.SCR_HEIGHT / 25);
+        textScore = new TextView(myGdxGame.scoreFont, GameSettings.SCR_WIDTH / 2 - 40, GameSettings.SCR_HEIGHT - 110);
+        textPowerClick = new TextView(myGdxGame.blackFontBasic, 15, 40);
+        waferScore = new ImageView(-20, 10, 250, 80, GameResources.BUTTON);
         icon_shop = new ImageView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_SHOP);
+
+        icon_music = new ImageView(5, GameSettings.SCR_HEIGHT - 80,
+                85, 75, GameResources.ICON_VOLUME);
+        icon_sound = new ImageView(5, GameSettings.SCR_HEIGHT - 160,
+                85, 75, GameResources.ICON_SOUND);
     }
 
     @Override
@@ -120,12 +131,15 @@ public class GameScreen implements Screen {
         }
 
         icon_shop.draw(myGdxGame.batch);
+        icon_music.draw(myGdxGame.batch);
+        icon_sound.draw(myGdxGame.batch);
 
+        waferScore.draw(myGdxGame.batch);
         textScore.draw(myGdxGame.batch);
         textPowerClick.draw(myGdxGame.batch);
 
         TextureRegion region = eyes.getKeyFrame(curTime, true);
-        myGdxGame.batch.draw(region, 190, 300, 200f, 80f);
+        myGdxGame.batch.draw(region, 200, 300, 200f, 80f);
 
         // Отрисовка шапки
         if (hat != null) {
@@ -171,7 +185,7 @@ public class GameScreen implements Screen {
             hat.dispose();
         }
         // Обновляем объект hat
-        hat = new ImageView(133, 360, 387, 287, curHat);
+        hat = new ImageView(143, 360, 387, 287, curHat);
     }
 
     private void updateColor() {
@@ -204,7 +218,7 @@ public class GameScreen implements Screen {
             capsule.dispose();
         }
         // Обновляем capsule
-        capsule = new ImageView(120, 60, 350, 490, curColor);
+        capsule = new ImageView(130, 60, 350, 490, curColor);
     }
 
     private void updateBackground() {
@@ -234,7 +248,7 @@ public class GameScreen implements Screen {
         background = new Texture(curBackground);
     }
 
-    private  void activatePassive(){
+    private void activatePassive(){
         int index = fileManager.readFromFile(GameResources.PASSIVE_DATA);
         switch (index) {
             case 1:
@@ -248,6 +262,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        myGdxGame.audioManager.gameMusic.dispose();
+        myGdxGame.audioManager.laughterSound.dispose();
         if (background != null){
             background.dispose();
         }
@@ -264,10 +280,14 @@ public class GameScreen implements Screen {
 //            textPowerClick = null;
         }
         icon_shop.dispose();
+        icon_music.dispose();
+        icon_sound.dispose();
 
         if(hat != null){
             hat.dispose();
         }
+
+        waferScore.dispose();
 
         if (textureAtlasArray != null){
             for (TextureAtlas atlas : textureAtlasArray) {
@@ -283,10 +303,33 @@ public class GameScreen implements Screen {
             if (capsule.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 updatePowerScore();
                 GameSettings.SCORE += GameSettings.UPGRADE_POWER;
+                if (isPauseSound == false){
+                    myGdxGame.audioManager.laughterSound.play(0.25f);
+                }
             }
 
             if (icon_shop.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 myGdxGame.setScreen(myGdxGame.shopScreen);
+            }
+
+            if (icon_music.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                if (isPauseMusic == false){
+                    isPauseMusic = true;
+                    myGdxGame.audioManager.gameMusic.pause();
+                }
+                else if (isPauseMusic == true){
+                    isPauseMusic = false;
+                    myGdxGame.audioManager.gameMusic.play();
+                }
+            }
+
+            if (icon_sound.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                if (isPauseSound == false){
+                    isPauseSound = true;
+                }
+                else if (isPauseSound == true){
+                    isPauseSound = false;
+                }
             }
         }
     }

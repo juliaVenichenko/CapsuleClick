@@ -23,9 +23,9 @@ public class CustomizationScreen implements Screen {
     public CustomizationScreen(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new Texture(GameResources.BACKGROUND_SHOP);
-        icon_color = new ImageView(50, 320, 140, 160, GameResources.ICON_COLOR);
-        icon_hat = new ImageView(240, 320, 140, 160, GameResources.ICON_HAT);
-        icon_bg = new ImageView(430, 320, 140, 160, GameResources.ICON_BG);
+        icon_color = new ImageView(30, 320, 160, 140, GameResources.ICON_COLOR);
+        icon_hat = new ImageView(220, 320, 160, 140, GameResources.ICON_HAT);
+        icon_bg = new ImageView(410, 320, 160, 140, GameResources.ICON_BG);
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
     }
