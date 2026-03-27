@@ -63,16 +63,15 @@ public class GameScreen implements Screen {
 
         activatePassive();
 
+        updateMusic();
+        updateSound();
+
         textScore = new TextView(myGdxGame.scoreFont, GameSettings.SCR_WIDTH / 2 - 40, GameSettings.SCR_HEIGHT - 110);
         textPowerClick = new TextView(myGdxGame.blackFontBasic, 15, 40);
         waferScore = new ImageView(-20, 10, 250, 80, GameResources.BUTTON);
         icon_shop = new ImageView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_SHOP);
 
-        icon_music = new ImageView(5, GameSettings.SCR_HEIGHT - 80,
-                85, 75, GameResources.ICON_VOLUME);
-        icon_sound = new ImageView(5, GameSettings.SCR_HEIGHT - 160,
-                85, 75, GameResources.ICON_SOUND);
     }
 
     @Override
@@ -116,6 +115,8 @@ public class GameScreen implements Screen {
         updateHat();
         updateColor();
         updateBackground();
+        updateMusic();
+        updateSound();
 
         textScore.setText(GameSettings.SCORE + "");
         textPowerClick.setText("Сила клика: " + GameSettings.UPGRADE_POWER);
@@ -131,8 +132,6 @@ public class GameScreen implements Screen {
         }
 
         icon_shop.draw(myGdxGame.batch);
-        icon_music.draw(myGdxGame.batch);
-        icon_sound.draw(myGdxGame.batch);
 
         waferScore.draw(myGdxGame.batch);
         textScore.draw(myGdxGame.batch);
@@ -144,6 +143,14 @@ public class GameScreen implements Screen {
         // Отрисовка шапки
         if (hat != null) {
             hat.draw(myGdxGame.batch);
+        }
+
+        if (icon_music != null) {
+            icon_music.draw(myGdxGame.batch);
+        }
+
+        if (icon_sound != null) {
+            icon_sound.draw(myGdxGame.batch);
         }
 
         myGdxGame.batch.end();
@@ -280,11 +287,17 @@ public class GameScreen implements Screen {
 //            textPowerClick = null;
         }
         icon_shop.dispose();
-        icon_music.dispose();
-        icon_sound.dispose();
 
-        if(hat != null){
+        if (hat != null){
             hat.dispose();
+        }
+
+        if (icon_music != null){
+            icon_music.dispose();
+        }
+
+        if (icon_sound != null){
+            icon_sound.dispose();
         }
 
         waferScore.dispose();
@@ -332,6 +345,26 @@ public class GameScreen implements Screen {
                 }
             }
         }
+    }
+
+    private void updateMusic(){
+
+            if (icon_music != null) {
+                icon_music.dispose();
+            }
+
+            icon_music = new ImageView(5, GameSettings.SCR_HEIGHT - 80,
+                    85, 75, isPauseMusic ? GameResources.ICON_VOLUME_OFF : GameResources.ICON_VOLUME);
+    }
+
+    private void updateSound(){
+
+        if (icon_sound != null) {
+            icon_sound.dispose();
+        }
+
+        icon_sound = new ImageView(5, GameSettings.SCR_HEIGHT - 160,
+                85, 75, isPauseSound ? GameResources.ICON_SOUND_OFF : GameResources.ICON_SOUND);
     }
 
     @Override

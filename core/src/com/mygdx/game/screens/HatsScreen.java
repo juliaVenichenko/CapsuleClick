@@ -43,10 +43,10 @@ public class HatsScreen implements Screen {
         hatCap = new ImageView(410, 500, 160, 140, GameResources.ICON_NG_HAT);
         hatCapybara = new ImageView(30, 230, 160, 140, GameResources.ICON_CAPYBARA_HAT);
 
-        buyHatApple = new ButtonView(220, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyHatCap = new ButtonView(410, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "20 монет");
-        buyHatCapybara = new ButtonView(30, 170, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "30 монет");
-        buyHatNull = new ButtonView(30, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 монет");
+        buyHatApple = new ButtonView(220, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "50 очков");
+        buyHatCap = new ButtonView(410, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "200 очков");
+        buyHatCapybara = new ButtonView(30, 170, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "400 очков");
+        buyHatNull = new ButtonView(30, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 очков");
 
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
@@ -90,22 +90,22 @@ public class HatsScreen implements Screen {
         if (Gdx.input.justTouched()) {
             myGdxGame.touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 
-            if (buyHatApple.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
+            if (buyHatApple.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 50) {
                 System.out.println("Writing to file: 1");
                 fileManager.writeToFile(1, GameResources.HATS_DATA);
-                GameSettings.SCORE -= 10;
+                GameSettings.SCORE -= 50;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
-            if (buyHatCap.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 20) {
+            if (buyHatCap.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 200) {
                 System.out.println("Writing to file: 2");
                 fileManager.writeToFile(2, GameResources.HATS_DATA);
-                GameSettings.SCORE -= 20;
+                GameSettings.SCORE -= 200;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
-            if (buyHatCapybara.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 30) {
+            if (buyHatCapybara.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 400) {
                 System.out.println("Writing to file: 3");
                 fileManager.writeToFile(3, GameResources.HATS_DATA);
-                GameSettings.SCORE -= 30;
+                GameSettings.SCORE -= 400;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
             if (buyHatNull.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
@@ -115,7 +115,7 @@ public class HatsScreen implements Screen {
             }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                myGdxGame.setScreen(myGdxGame.customizationScreen);
+                myGdxGame.setScreen(myGdxGame.gameScreen);
             }
         }
     }

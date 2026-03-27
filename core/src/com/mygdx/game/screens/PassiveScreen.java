@@ -21,7 +21,7 @@ public class PassiveScreen implements Screen {
     private ButtonView icon_back;
     private FileManager fileManager;
     String curPassive = GameResources.ICON_OFF;
-    String curPassiveText = "     Купить за 100 очков";
+    String curPassiveText = "     Купить за 700 очков";
 
     public PassiveScreen(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
@@ -71,10 +71,10 @@ public class PassiveScreen implements Screen {
     private void handleInput() {
         if (Gdx.input.justTouched()) {
             myGdxGame.touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (passiveBtn.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10 && curPassive.equals(GameResources.ICON_OFF)) {
+            if (passiveBtn.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 700 && curPassive.equals(GameResources.ICON_OFF)) {
                 System.out.println("Writing to file: 1");
                 fileManager.writeToFile(1, GameResources.PASSIVE_DATA);
-                GameSettings.SCORE -= 10;
+                GameSettings.SCORE -= 700;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
 
@@ -85,7 +85,7 @@ public class PassiveScreen implements Screen {
             }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                myGdxGame.setScreen(myGdxGame.shopScreen);
+                myGdxGame.setScreen(myGdxGame.gameScreen);
             }
         }
     }
@@ -99,7 +99,7 @@ public class PassiveScreen implements Screen {
                 break;
             case 0:
                 curPassive = GameResources.ICON_OFF;
-                curPassiveText = "    Купить за 100 очков";
+                curPassiveText = "    Купить за 700 очков";
         }
         // Освобождаем ресурсы старого объекта passiveBtn
         if (passiveBtn != null) {

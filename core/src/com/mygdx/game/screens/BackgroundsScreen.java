@@ -39,11 +39,11 @@ public class BackgroundsScreen implements Screen {
         bgRainbow = new ImageView(30, 190, 160, 140, GameResources.ICON_BG_RAINBOW);
         bgEpic = new ImageView(220, 190, 160, 140, GameResources.ICON_BG_EPIC);
 
-        buyBgDefault = new ButtonView(30, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 монет");
-        buyBgPlanet = new ButtonView(220, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyBgMountains = new ButtonView(410, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyBgRainbow = new ButtonView(30, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
-        buyBgEpic = new ButtonView(220, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "10 монет");
+        buyBgDefault = new ButtonView(30, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 очков");
+        buyBgPlanet = new ButtonView(220, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "60 очков");
+        buyBgMountains = new ButtonView(410, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "250 очков");
+        buyBgRainbow = new ButtonView(30, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "380 очков");
+        buyBgEpic = new ButtonView(220, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "650 очков");
 
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
@@ -95,33 +95,33 @@ public class BackgroundsScreen implements Screen {
                 fileManager.writeToFile(0, GameResources.BACKGROUNDS_DATA);
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
-            if (buyBgPlanet.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
+            if (buyBgPlanet.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 60) {
                 System.out.println("Writing to file: 1");
                 fileManager.writeToFile(1, GameResources.BACKGROUNDS_DATA);
-                GameSettings.SCORE -= 10;
+                GameSettings.SCORE -= 60;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
-            if (buyBgMountains.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
+            if (buyBgMountains.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 250) {
                 System.out.println("Writing to file: 2");
                 fileManager.writeToFile(2, GameResources.BACKGROUNDS_DATA);
-                GameSettings.SCORE -= 10;
+                GameSettings.SCORE -= 250;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
-            if (buyBgRainbow.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
+            if (buyBgRainbow.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 380) {
                 System.out.println("Writing to file: 3");
                 fileManager.writeToFile(3, GameResources.BACKGROUNDS_DATA);
-                GameSettings.SCORE -= 10;
+                GameSettings.SCORE -= 380;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
-            if (buyBgEpic.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10) {
+            if (buyBgEpic.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 650) {
                 System.out.println("Writing to file: 4");
                 fileManager.writeToFile(4, GameResources.BACKGROUNDS_DATA);
-                GameSettings.SCORE -= 10;
+                GameSettings.SCORE -= 650;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                myGdxGame.setScreen(myGdxGame.customizationScreen);
+                myGdxGame.setScreen(myGdxGame.gameScreen);
             }
         }
     }

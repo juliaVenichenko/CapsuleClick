@@ -21,14 +21,14 @@ public class PowerScreen implements Screen {
     private ButtonView icon_back;
     private FileManager fileManager;
     String curLevel = GameResources.ICON_LEVEL1;
-    String curLevelText = "Купить за 10 очков";
+    String curLevelText = "Купить за 250 очков";
 
     public PowerScreen(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new Texture(GameResources.BACKGROUND_SHOP);
         fileManager = new FileManager();
 
-        levelsText = new TextView(myGdxGame.blackFontMulti, 140, 150, curLevelText);
+        levelsText = new TextView(myGdxGame.blackFontMulti, 125, 150, curLevelText);
 
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
@@ -71,32 +71,32 @@ public class PowerScreen implements Screen {
     private void handleInput() {
         if (Gdx.input.justTouched()) {
             myGdxGame.touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (levels.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 10 && curLevel.equals(GameResources.ICON_LEVEL1)) {
+            if (levels.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 250 && curLevel.equals(GameResources.ICON_LEVEL1)) {
                 System.out.println("Writing to file: 2");
                 fileManager.writeToFile(2, GameResources.LEVELS_DATA);
                 GameSettings.UPGRADE_POWER = 2;
-                GameSettings.SCORE -= 10;
+                GameSettings.SCORE -= 250;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
 
-            if (levels.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 20 && curLevel.equals(GameResources.ICON_LEVEL2)) {
+            if (levels.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 350 && curLevel.equals(GameResources.ICON_LEVEL2)) {
                 System.out.println("Writing to file: 3");
                 fileManager.writeToFile(3, GameResources.LEVELS_DATA);
                 GameSettings.UPGRADE_POWER = 3;
-                GameSettings.SCORE -= 20;
+                GameSettings.SCORE -= 350;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
 
-            if (levels.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 30 && curLevel.equals(GameResources.ICON_LEVEL3)) {
+            if (levels.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 450 && curLevel.equals(GameResources.ICON_LEVEL3)) {
                 System.out.println("Writing to file: 4");
                 fileManager.writeToFile(4, GameResources.LEVELS_DATA);
                 GameSettings.UPGRADE_POWER = 4;
-                GameSettings.SCORE -= 30;
+                GameSettings.SCORE -= 450;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                myGdxGame.setScreen(myGdxGame.shopScreen);
+                myGdxGame.setScreen(myGdxGame.gameScreen);
             }
         }
     }
@@ -109,15 +109,15 @@ public class PowerScreen implements Screen {
                 break;
             case 2:
                 curLevel = GameResources.ICON_LEVEL2;
-                curLevelText = "Купить за 20 очков";
+                curLevelText = "Купить за 350 очков";
                 break;
             case 3:
                 curLevel = GameResources.ICON_LEVEL3;
-                curLevelText = "Купить за 30 очков";
+                curLevelText = "Купить за 450 очков";
                 break;
             case 4:
                 curLevel = GameResources.ICON_LEVEL4;
-                curLevelText = "Купить за 0 очков";
+                curLevelText = "    Купить за 0 очков";
                 break;
         }
         // Освобождаем ресурсы старого объекта levels

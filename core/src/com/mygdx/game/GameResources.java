@@ -31,7 +31,9 @@ public class GameResources {
     public static final String ICON_SHOP = "icons/icon_shop.png";
     public static final String ICON_GAME = "icons/icon_game.png";
     public static final String ICON_VOLUME = "icons/icon_volume.png";
+    public static final String ICON_VOLUME_OFF = "icons/icon_volume_off.png";
     public static final String ICON_SOUND = "icons/icon_sound.png";
+    public static final String ICON_SOUND_OFF = "icons/icon_sound_off.png";
     public static final String ICON_BACK = "icons/icon_back.png";
     public static final String ICON_HAT = "icons/icon_hat.png";
     public static final String ICON_COLOR = "icons/icon_color.png";
