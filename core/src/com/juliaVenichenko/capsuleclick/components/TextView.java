@@ -25,6 +25,25 @@ public class TextView extends View{
         width = glyphLayout.width;
         height = glyphLayout.height;
     }
+
+    public void centerAt(float screenWidth, float y) {
+        if (text == null || text.isEmpty()) {
+            setPosition(screenWidth / 2f, y);
+            return;
+        }
+
+        GlyphLayout glyphLayout = new GlyphLayout(font, text);
+        float textWidth = glyphLayout.width;
+        float x = (screenWidth - textWidth) / 2f;
+        setPosition(x, y);
+    }
+
+    public void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+
     @Override
     public void draw(SpriteBatch batch) {
         font.draw(batch, text, x, y + height);

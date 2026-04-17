@@ -21,12 +21,14 @@ public class BackgroundsScreen implements Screen {
     private ImageView bgMountains;
     private ImageView bgRainbow;
     private ImageView bgEpic;
+    private ImageView bgRaft;
     private ButtonView icon_back;
     private ButtonView buyBgDefault;
     private ButtonView buyBgPlanet;
     private ButtonView buyBgMountains;
     private ButtonView buyBgRainbow;
     private ButtonView buyBgEpic;
+    private ButtonView buyBgRaft;
 
     private FileManager fileManager;
 
@@ -38,12 +40,14 @@ public class BackgroundsScreen implements Screen {
         bgMountains = new ImageView(410, 500, 160, 140, GameResources.ICON_BG_MOUNTAINS);
         bgRainbow = new ImageView(30, 190, 160, 140, GameResources.ICON_BG_RAINBOW);
         bgEpic = new ImageView(220, 190, 160, 140, GameResources.ICON_BG_EPIC);
+        bgRaft = new ImageView(410, 190, 160, 140, GameResources.ICON_BG_RAFT);
 
         buyBgDefault = new ButtonView(30, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "0 очков");
         buyBgPlanet = new ButtonView(220, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "60 очков");
         buyBgMountains = new ButtonView(410, 440, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "250 очков");
         buyBgRainbow = new ButtonView(30, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "380 очков");
         buyBgEpic = new ButtonView(220, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "650 очков");
+        buyBgRaft = new ButtonView(410, 130, 160, 70, myGdxGame.defaultFont, GameResources.BUTTON, "850 очков");
 
         icon_back = new ButtonView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
                 85, 75, GameResources.ICON_BACK);
@@ -74,12 +78,14 @@ public class BackgroundsScreen implements Screen {
         bgMountains.draw(myGdxGame.batch);
         bgRainbow.draw(myGdxGame.batch);
         bgEpic.draw(myGdxGame.batch);
+        bgRaft.draw(myGdxGame.batch);
 
         buyBgDefault.draw(myGdxGame.batch);
         buyBgPlanet.draw(myGdxGame.batch);
         buyBgMountains.draw(myGdxGame.batch);
         buyBgRainbow.draw(myGdxGame.batch);
         buyBgEpic.draw(myGdxGame.batch);
+        buyBgRaft.draw(myGdxGame.batch);
 
         icon_back.draw(myGdxGame.batch);
 
@@ -119,6 +125,12 @@ public class BackgroundsScreen implements Screen {
                 GameSettings.SCORE -= 650;
                 myGdxGame.audioManager.buySound.play(0.2f);
             }
+            if (buyBgRaft.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && GameSettings.SCORE >= 8) {
+                System.out.println("Writing to file: 5");
+                fileManager.writeToFile(5, GameResources.BACKGROUNDS_DATA);
+                GameSettings.SCORE -= 8;
+                myGdxGame.audioManager.buySound.play(0.2f);
+            }
 
             if (icon_back.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 myGdxGame.setScreen(myGdxGame.gameScreen);
@@ -135,12 +147,14 @@ public class BackgroundsScreen implements Screen {
         bgMountains.dispose();
         bgRainbow.dispose();
         bgEpic.dispose();
+        bgRaft.dispose();
 
         buyBgDefault.dispose();
         buyBgPlanet.dispose();
         buyBgMountains.dispose();
         buyBgRainbow.dispose();
         buyBgEpic.dispose();
+        buyBgRaft.dispose();
         icon_back.dispose();
     }
 

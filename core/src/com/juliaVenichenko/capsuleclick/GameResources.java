@@ -10,6 +10,7 @@ public class GameResources {
     public static final String BACKGROUND_MOUNTAINS = "backgrounds/background_mountains.png";
     public static final String BACKGROUND_PLANET = "backgrounds/background_planet.png";
     public static final String BACKGROUND_RAINBOW = "backgrounds/background_rainbow.png";
+    public static final String BACKGROUND_RAFT = "backgrounds/background_raft.png";
 
     // Скины капсулы
     public static final String CAPSULE_TMP = "capsule_skins/capsule_tmp.png";
@@ -25,7 +26,16 @@ public class GameResources {
     public static final String HAT_APPLE = "hats/apple.png";
     public static final String HAT_CAP = "hats/cap.png";
     public static final String HAT_CAPYBARA = "hats/capybara.png";
+    public static final String HAT_CYLINDER = "hats/cylinder.png";
 
+    // Очки
+    public static final String GLASSES_NULL = "glasses/glasses_null.png";
+    public static final String GLASSES_BASE = "glasses/glasses_base.png";
+
+    // Аксессуары
+    public static final String ACCESSORIES_NULL = "accessories/null.png";
+    public static final String ACCESSORIES_BAG = "accessories/bag.png";
+    public static final String ACCESSORIES_CIRCLE = "accessories/circle.png";
 
     // ИКОНКИ
     public static final String ICON_SHOP = "icons/icon_shop.png";
@@ -38,18 +48,21 @@ public class GameResources {
     public static final String ICON_HAT = "icons/icon_hat.png";
     public static final String ICON_COLOR = "icons/icon_color.png";
     public static final String ICON_BG = "icons/icon_bg.png";
+    public static final String ICON_GLASSES = "icons/icon_glasses.png";
+    public static final String ICON_ACCESSORIES = "icons/icon_accessories.png";
     public static final String ICON_CUSTOMIZATION = "icons/icon_customization.png";
     public static final String ICON_UPGRADE = "icons/icon_upgrade.png";
     public static final String ICON_POWER = "icons/icon_power.png";
     public static final String ICON_PASSIVE = "icons/icon_passive.png";
 
-    // Шапки
+    // Шапки (иконки)
     public static final String ICON_NULL_HAT = "icons/shop/hats/icon_null_hat.png";
     public static final String ICON_APPLE_HAT = "icons/shop/hats/icon_apple_hat.png";
     public static final String ICON_CAPYBARA_HAT = "icons/shop/hats/icon_capybara_hat.png";
     public static final String ICON_NG_HAT = "icons/shop/hats/icon_ng_hat.png";
+    public static final String ICON_CYLINDER_HAT = "icons/shop/hats/icon_cylinder_hat.png";
 
-    // Цвета
+    // Цвета (иконки)
     public static final String ICON_COLOR_BLUE = "icons/shop/colors/blue.png";
     public static final String ICON_COLOR_GREEN = "icons/shop/colors/green.png";
     public static final String ICON_COLOR_LILAC = "icons/shop/colors/lilac.png";
@@ -58,12 +71,23 @@ public class GameResources {
     public static final String ICON_COLOR_WHITE = "icons/shop/colors/white.png";
     public static final String ICON_COLOR_YELLOW = "icons/shop/colors/yellow.png";
 
-    // Фоны
+    // Фоны (иконки)
     public static final String ICON_BG_DEFAULT = "icons/shop/bg/icon_bg_default.png";
     public static final String ICON_BG_EPIC = "icons/shop/bg/icon_bg_epic.png";
     public static final String ICON_BG_MOUNTAINS = "icons/shop/bg/icon_bg_mountains.png";
     public static final String ICON_BG_PLANET = "icons/shop/bg/icon_bg_planet.png";
     public static final String ICON_BG_RAINBOW = "icons/shop/bg/icon_bg_rainbow.png";
+    public static final String ICON_BG_RAFT = "icons/shop/bg/icon_bg_raft.png";
+
+    // Очки (иконки)
+    public static final String ICON_GLASSES_NULL = "icons/shop/glasses/icon_glasses_null.png";
+    public static final String ICON_GLASSES_BASE = "icons/shop/glasses/icon_glasses.png";
+
+    // Аксессуары (иконки)
+    public static final String ICON_ACCESSORIES_NULL = "icons/shop/accessories/icon_null.png";
+    public static final String ICON_ACCESSORIES_BAG = "icons/shop/accessories/icon_bag.png";
+    public static final String ICON_ACCESSORIES_CIRCLE = "icons/shop/accessories/icon_circle.png";
+
 
     // Уровни силы клика
     public static final String ICON_LEVEL1 = "Level1.png";
@@ -88,6 +112,8 @@ public class GameResources {
     public static final String HATS_DATA = "files/hats_data.txt";
     public static final String BACKGROUNDS_DATA = "files/backgrounds_data.txt";
     public static final String COLORS_DATA = "files/colors_data.txt";
+    public static final String GLASSES_DATA = "files/glasses_data.txt";
+    public static final String ACCESSORIES_DATA = "files/accessories_data.txt";
     public static final String LEVELS_DATA = "files/levels_data.txt";
     public static final String PASSIVE_DATA = "files/passive_data.txt";
 }

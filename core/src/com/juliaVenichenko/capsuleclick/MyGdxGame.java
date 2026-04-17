@@ -10,10 +10,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 import com.juliaVenichenko.capsuleclick.managers.AudioManager;
+import com.juliaVenichenko.capsuleclick.screens.AccessoriesScreen;
 import com.juliaVenichenko.capsuleclick.screens.BackgroundsScreen;
 import com.juliaVenichenko.capsuleclick.screens.ColorsScreen;
 import com.juliaVenichenko.capsuleclick.screens.CustomizationScreen;
 import com.juliaVenichenko.capsuleclick.screens.GameScreen;
+import com.juliaVenichenko.capsuleclick.screens.GlassesScreen;
 import com.juliaVenichenko.capsuleclick.screens.HatsScreen;
 import com.juliaVenichenko.capsuleclick.screens.PassiveScreen;
 import com.juliaVenichenko.capsuleclick.screens.PowerScreen;
@@ -38,6 +40,8 @@ public class MyGdxGame extends Game {
 	public BackgroundsScreen backgroundsScreen;
 	public PowerScreen powerScreen;
 	public PassiveScreen passiveScreen;
+	public GlassesScreen glassesScreen;
+	public AccessoriesScreen accessoriesScreen;
 
 	public AudioManager audioManager;
 
@@ -64,6 +68,8 @@ public class MyGdxGame extends Game {
 		backgroundsScreen = new BackgroundsScreen(this);
 		powerScreen = new PowerScreen(this);
 		passiveScreen = new PassiveScreen(this);
+		glassesScreen = new GlassesScreen(this);
+		accessoriesScreen = new AccessoriesScreen(this);
 
 		audioManager = new AudioManager();
 
@@ -86,6 +92,7 @@ public class MyGdxGame extends Game {
 		backgroundsScreen.dispose();
 		powerScreen.dispose();
 		passiveScreen.dispose();
+		glassesScreen.dispose();
+		accessoriesScreen.dispose();
 	}
-
 }

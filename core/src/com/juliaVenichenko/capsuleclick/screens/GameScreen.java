@@ -28,10 +28,14 @@ public class GameScreen implements Screen {
     private ImageView icon_sound;
     private TextView textPowerClick;
     private ImageView hat;
+    private ImageView glasses;
+    private ImageView accessories;
     private ImageView waferScore;
     String curHat = GameResources.HAT_NULL;
     String curColor = GameResources.CAPSULE_TMP;
     String curBackground = GameResources.BACKGROUND_DEFAULT;
+    String curGlasses = GameResources.GLASSES_NULL;
+    String curAccessories = GameResources.ACCESSORIES_NULL;
     FileManager fileManager;
     private boolean onPassive = false;
     boolean isPauseMusic = false;
@@ -57,6 +61,8 @@ public class GameScreen implements Screen {
         updateHat();
 
         updateBackground();
+        updateGlasses();
+        updateAccessories();
 
         updatePowerScore();
 
@@ -65,7 +71,9 @@ public class GameScreen implements Screen {
         updateMusic();
         updateSound();
 
-        textScore = new TextView(myGdxGame.scoreFont, GameSettings.SCR_WIDTH / 2 - 40, GameSettings.SCR_HEIGHT - 110);
+        textScore = new TextView(myGdxGame.scoreFont, 0, 0); // временные координаты
+        textScore.setText(formatScore(GameSettings.SCORE));
+        updateScorePosition();
         textPowerClick = new TextView(myGdxGame.blackFontBasic, 15, 40);
         waferScore = new ImageView(-20, 10, 250, 80, GameResources.BUTTON);
         icon_shop = new ImageView(GameSettings.SCR_WIDTH - 90, GameSettings.SCR_HEIGHT - 80,
@@ -106,6 +114,10 @@ public class GameScreen implements Screen {
             passiveIncomeTimer += delta;
             if (passiveIncomeTimer >= PASSIVE_INCOME_INTERVAL) {
                 GameSettings.SCORE += GameSettings.UPGRADE_PASSIVE;
+
+                textScore.setText(formatScore(GameSettings.SCORE));
+                updateScorePosition(); // центрируем после обновления
+
                 passiveIncomeTimer = 0;
             }
         }
@@ -114,6 +126,8 @@ public class GameScreen implements Screen {
         updateHat();
         updateColor();
         updateBackground();
+        updateGlasses();
+        updateAccessories();
         updateMusic();
         updateSound();
 
@@ -139,6 +153,14 @@ public class GameScreen implements Screen {
         TextureRegion region = eyes.getKeyFrame(curTime, true);
         myGdxGame.batch.draw(region, 200, 300, 200f, 80f);
 
+        if (glasses != null) {
+            glasses.draw(myGdxGame.batch);
+        }
+
+        if (accessories != null) {
+            accessories.draw(myGdxGame.batch);
+        }
+
         // Отрисовка шапки
         if (hat != null) {
             hat.draw(myGdxGame.batch);
@@ -153,6 +175,21 @@ public class GameScreen implements Screen {
         }
 
         myGdxGame.batch.end();
+    }
+
+    private String formatScore(long score) {
+        if (score >= 1_000) {
+            double thousands = score / 1_000.0;
+            return String.format("%.1fK", thousands);
+        } else {
+            return String.valueOf(score);
+        }
+    }
+
+    private void updateScorePosition() {
+        float screenWidth = GameSettings.SCR_WIDTH;
+        float y = GameSettings.SCR_HEIGHT - 110;
+        textScore.centerAt(screenWidth, y);
     }
 
     private void updatePowerScore(){
@@ -171,7 +208,7 @@ public class GameScreen implements Screen {
     }
 
     private void updateHat() {
-        int index = fileManager.readFromFile(GameResources.HATS_DATA); // Предполагается, что это возвращает индекс шапки
+        int index = fileManager.readFromFile(GameResources.HATS_DATA); // возвращает индекс шапки
         switch (index) {
             case 1:
                 curHat = GameResources.HAT_APPLE;
@@ -181,6 +218,9 @@ public class GameScreen implements Screen {
                 break;
             case 3:
                 curHat = GameResources.HAT_CAPYBARA;
+                break;
+            case 4:
+                curHat = GameResources.HAT_CYLINDER;
                 break;
             case 0:
                 curHat = GameResources.HAT_NULL;
@@ -242,6 +282,9 @@ public class GameScreen implements Screen {
             case 4:
                 curBackground = GameResources.BACKGROUND_EPIC;
                 break;
+            case 5:
+                curBackground = GameResources.BACKGROUND_RAFT;
+                break;
             case 0:
                 curBackground = GameResources.BACKGROUND_DEFAULT;
                 break;
@@ -252,6 +295,45 @@ public class GameScreen implements Screen {
         }
         // Обновляем background
         background = new Texture(curBackground);
+    }
+
+    private void updateGlasses() {
+        int index = fileManager.readFromFile(GameResources.GLASSES_DATA);
+        switch (index) {
+            case 1:
+                curGlasses = GameResources.GLASSES_BASE;
+                break;
+            case 0:
+                curGlasses = GameResources.GLASSES_NULL;
+                break;
+        }
+        // Освобождаем ресурсы старого объекта glasses
+        if (glasses != null) {
+            glasses.dispose();
+        }
+        // Обновляем glasses
+        glasses = new ImageView(197, 258, 205, 185, curGlasses);
+    }
+
+    private void updateAccessories() {
+        int index = fileManager.readFromFile(GameResources.ACCESSORIES_DATA);
+        switch (index) {
+            case 1:
+                curAccessories = GameResources.ACCESSORIES_BAG;
+                break;
+            case 2:
+                curAccessories = GameResources.ACCESSORIES_CIRCLE;
+                break;
+            case 0:
+                curAccessories = GameResources.ACCESSORIES_NULL;
+                break;
+        }
+        // Освобождаем ресурсы старого объекта accessories
+        if (accessories != null) {
+            accessories.dispose();
+        }
+        // Обновляем accessories
+        accessories = new ImageView(2, 190, 600, 100, curAccessories);
     }
 
     private void activatePassive(){
@@ -291,6 +373,14 @@ public class GameScreen implements Screen {
             hat.dispose();
         }
 
+        if (glasses != null){
+            glasses.dispose();
+        }
+
+        if (accessories != null){
+            accessories.dispose();
+        }
+
         if (icon_music != null){
             icon_music.dispose();
         }
@@ -315,6 +405,10 @@ public class GameScreen implements Screen {
             if (capsule.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 updatePowerScore();
                 GameSettings.SCORE += GameSettings.UPGRADE_POWER;
+
+                textScore.setText(formatScore(GameSettings.SCORE));
+                updateScorePosition();
+
                 if (isPauseSound == false){
                     myGdxGame.audioManager.laughterSound.play(0.25f);
                 }
