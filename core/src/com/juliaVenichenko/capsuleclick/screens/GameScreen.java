@@ -333,7 +333,7 @@ public class GameScreen implements Screen {
             accessories.dispose();
         }
         // Обновляем accessories
-        accessories = new ImageView(2, 190, 600, 100, curAccessories);
+        accessories = new ImageView(2, 160, 600, 170, curAccessories);
     }
 
     private void activatePassive(){
